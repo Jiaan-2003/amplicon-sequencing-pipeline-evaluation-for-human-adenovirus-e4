@@ -172,4 +172,3 @@ dependencies:
   - zstd=1.5.7
   - pip:
       - artic==1.10.1
-prefix: /gpfs01/home/mbxjr7/miniconda3/envs/artic
