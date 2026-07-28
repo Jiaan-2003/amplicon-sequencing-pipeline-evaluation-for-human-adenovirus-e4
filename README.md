@@ -57,7 +57,7 @@ The following tables list the tools and packages with their versions at the time
 |------|--------|
 | [ARTIC fieldbioinformatics](https://github.com/artic-network/fieldbioinformatics) | 1.10.1 |
 | [ViroConstrictor](https://github.com/RIVM-bioinformatics/ViroConstrictor) | 1.6.6 |
-| [MAFFT](https://mafft.cbrc.jp/alignment/software/) | 7.526 |
+| [MAFFT](https://mafft.cbrc.jp/alignment/software/) | v7.526 |
 | [R](https://www.r-project.org/) | 4.5.1 |
 | [RStudio](https://posit.co/products/open-source/rstudio/) | 2025.05.1+513 |
 | [Inkscape](https://inkscape.org/) | [1.4.4] |
@@ -89,7 +89,7 @@ conda env create -f environments/artic_environment.yml
 conda env create -f environments/viroconstrictor_environment.yml
 ```
 
-## Placeholder paths
+## Placeholder Paths
 
 The Bash scripts in this workflow have placeholder paths implemented (/your/project/path), so users should ensure they replace these with the corresponding path of their own repository.
 
@@ -224,7 +224,7 @@ The second script only used KX384945, the poorer reference match, to produce res
 
 **Script:** scripts/viroconstrictor/combine_ds1641_fastqs.sh
 
-The ViroConstrictor pipeline required a single FASTQ file containing each sample, which this script fulfills by combining the individual pass FASTQ files into one .fast.gz file.
+The ViroConstrictor pipeline required a single FASTQ file containing each sample, which this script fulfills by combining the individual pass FASTQ files into one .fastq.gz file.
 
 **Input:** reads/ds1641/barcode*/*.fastq.gz
 
@@ -289,7 +289,7 @@ viroconstrictor_KX_consensus_metrics.tsv
 ## 4. Downstream Analysis and Visualisation 
 
 A series of four R scripts are included in this repository that visualised results of the pipelines.
-Barcode62 is excluded from every analysis in the scripts because one primer pool failed to amplify in the laboratory, and this was observed barcode62's consensus sequences.
+Barcode62 is excluded from every analysis in the scripts because one primer pool failed to amplify in the laboratory, and this was observed in barcode62's consensus sequences.
 
 ### 4.1 ARTIC Reference Comparison Barplot
 
@@ -318,7 +318,7 @@ This script visualises the mean amplicon coverage across the MN307142 tiled-ampl
 **Script:** scripts/analysis/pipeline_mutation_comparison.R
 
 This script compared the reported mutation counts between the consensus genomes generated against MN307142 and KX384945 by both the ARTIC and ViroConstrictor pipelines.
-There two separate panels, one panel to show mutation counts for KX384945 consensus sequences between both pipelines, and the other to show the mutation counts for MN307142 consensus sequences between both pipelines.
+There are two separate panels, one panel to show mutation counts for KX384945 consensus sequences between both pipelines, and the other to show the mutation counts for MN307142 consensus sequences between both pipelines.
 
 **Input:** mutation_counts.csv
 
@@ -334,9 +334,9 @@ This script visualises a linear representation of the HAdV-E4 genome that shows 
 
 **Input:** Accessible GenBank annotated MN307142 HAdV genome gene coordinates and MN307142 primer scheme amplicon coordinates (which is provided in this repository).
 
-**Output:**: HAdV_E4_gene_overlap_amplicon_map.svg
+**Output:** HAdV_E4_gene_overlap_amplicon_map.svg
 
-This SVG was edited in Inkscape to fix format and exported out as HAdV_E4_gene_overlap_amplicon_map.png` for inclusion in the dissertation and this repository (see outputs/figures).
+This SVG was edited in Inkscape to fix format and exported out as HAdV_E4_gene_overlap_amplicon_map.png for inclusion in the dissertation and this repository (see outputs/figures).
 
 ### Author 
 
