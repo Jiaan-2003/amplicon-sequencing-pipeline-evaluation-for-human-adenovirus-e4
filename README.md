@@ -128,11 +128,12 @@ The following describes each stage of the workflow in this analysis and details 
 This ARTIC wrapper script processes each barcode in the analysis against both the MN307142 and KX384945 reference genomes. This uses artic guppyplex to filter reads to an optimised length range of 2,000-3,000 bp. Then, artic minion runs each barcode against the references and their corresponding bed file.
 Other parameters include a normalisation set to 200 and the use of eight threads.
 
-**Input:** reads/ds1641/barcode*/
-references/HAdV_E4_MN307142.fas
-references/HAdV_E4_KX384945.fas
-bed_files/MN307142.scheme.SA.update.bed
-bed_files/KX384945.scheme.SA.update.bed
+**Input:** 
+- reads/ds1641/barcode*/
+- references/HAdV_E4_MN307142.fas
+- references/HAdV_E4_KX384945.fas
+- bed_files/MN307142.scheme.SA.update.bed
+- bed_files/KX384945.scheme.SA.update.bed
 
 **Output:** 
 ```bash
@@ -251,9 +252,10 @@ Key parameters and configuration options in this analysis script include:
 - eight threads
 
 
-**Inputs:** results/adeno_E4/viroconstrictor/raw_combined_fastqs/
-references/HAdV_E4_combined_refs.fasta
-bed_files/HAdV_E4_combined_refs.scheme.SA.update.bed
+**Input:** 
+- results/adeno_E4/viroconstrictor/raw_combined_fastqs/
+- references/HAdV_E4_combined_refs.fasta
+- bed_files/HAdV_E4_combined_refs.scheme.SA.update.bed
 
 **Outputs:** results/adeno_E4/viroconstrictor/ds1641_matchref/
 
@@ -266,9 +268,10 @@ ViroConstrictor produces these in two separate directories within results in the
 
 This ViroConstrictor analysis script excluded MatchRef, and ran only the poorer-suited KX384945 reference genome against barcodes to produce results for comparison against KX384945 ARTIC results.
 
-**Input:** results/adeno_E4/viroconstrictor/raw_combined_fastqs/
-references/HAdV_E4_KX384945_uppercase_and_ungapped.fasta
-bed_files/KX384945.scheme.SA.update.bed
+**Input:** 
+- results/adeno_E4/viroconstrictor/raw_combined_fastqs/
+- references/HAdV_E4_KX384945_uppercase_and_ungapped.fasta
+- bed_files/KX384945.scheme.SA.update.bed
 
 **Output:** results/adeno_E4/viroconstrictor/ds1641_KX384945/
 
@@ -276,8 +279,9 @@ Key outputs of this analysis were produced by the pipeline in the same way as th
 
 ### 3.4 ViroConstrictor Metrics
 
-**Scripts:** scripts/viroconstrictor/viroconstrictor_matchref_metrics.sh
-scripts/viroconstrictor/viroconstrictor_KX384945_metrics.sh
+**Scripts:** 
+- scripts/viroconstrictor/viroconstrictor_matchref_metrics.sh
+- scripts/viroconstrictor/viroconstrictor_KX384945_metrics.sh
 
 These two scripts were used to extract consensus sequence metrics from ViroConstrictor outputs
 
