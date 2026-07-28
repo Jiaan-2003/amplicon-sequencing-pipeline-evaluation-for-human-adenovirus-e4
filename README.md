@@ -9,7 +9,7 @@ This repository contains the scripts, reference genomes, primer schemes, softwar
 ## Clone the Repository
 
 ```bash
-git clone 
+git clone https://github.com/Jiaan-2003/amplicon-sequencing-pipeline-evaluation-for-human-adenovirus-e4.git
 ```
 ## Data Overview
 
@@ -90,7 +90,7 @@ conda env create -f environments/viroconstrictor_environment.yml
 
 ```
 
-### Placeholder paths
+## Placeholder paths
 
 The Bash scripts in this workflow have placeholder paths implemented (/your/project/path), so users should ensure they replace these with the corresponding path of their own repository.
 
@@ -186,7 +186,7 @@ results/
         └── MN307142_MAFFT/
             └── ds1641_MN307142_mafft_wrapper.fasta
 
-## 2.2 KX384945 Alignment
+### 2.2 KX384945 Alignment
 
 **Script:** scripts/alignment/ds1641_KX384945_mafft_wrapper.sh
 
