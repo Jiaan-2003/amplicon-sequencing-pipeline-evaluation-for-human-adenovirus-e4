@@ -198,4 +198,3 @@ dependencies:
   - zlib-ng=2.3.3
   - zstandard=0.25.0
   - zstd=1.5.7
-prefix: /gpfs01/home/mbxjr7/miniconda3/envs/viroconstrictor
