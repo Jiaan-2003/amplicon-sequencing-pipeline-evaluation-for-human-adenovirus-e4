@@ -10,6 +10,7 @@ This repository contains the scripts, reference genomes, primer schemes, softwar
 
 ```bash
 git clone https://github.com/Jiaan-2003/amplicon-sequencing-pipeline-evaluation-for-human-adenovirus-e4.git
+cd amplicon-sequencing-pipeline-evaluation-for-human-adenovirus-e4
 ```
 ## Data Overview
 
@@ -49,7 +50,7 @@ reads/
 
 ## Software and Tools
 
-The computational use of the ARTIC and ViroConstrictor pipelines whas conducted via a series of custom Bash scripts on the University of Nottingham high-performance computer (HPC), which used a Slurm system for job submission. Additional analysis included the use of Inkscape for figure formatting, NCBI BLASTn to search sequences and RStudio to utilise packages for figure generation.
+The computational use of the ARTIC and ViroConstrictor pipelines was conducted via a series of custom Bash scripts on the University of Nottingham high-performance computer (HPC), which used a Slurm system for job submission. Additional analysis included the use of Inkscape for figure formatting, NCBI BLASTn to search sequences and RStudio to utilise packages for figure generation.
 The following tables list the tools and packages with their versions at the time of use.
 
 | Tool | Version |
@@ -84,10 +85,8 @@ environments/viroconstrictor_environment.yml
 These environments can be reproduced with the following commands:
 
 ```{r}
-
 conda env create -f environments/artic_environment.yml
 conda env create -f environments/viroconstrictor_environment.yml
-
 ```
 
 ## Placeholder paths
@@ -96,7 +95,7 @@ The Bash scripts in this workflow have placeholder paths implemented (/your/proj
 
 ## Reference Genomes and Primer Schemes
 
-Two HAdV-E4 references genomes were used throughout the study to assess reference selection as a FASTA file and corresponding primer schemes:
+Two HAdV-E4 reference genomes were used throughout the study to assess reference selection as a FASTA file and corresponding primer schemes:
 
 | Reference | FASTA File | Primer Scheme |
 |-----------|------------|---------------|
@@ -105,6 +104,7 @@ Two HAdV-E4 references genomes were used throughout the study to assess referenc
 
 While these were sufficient for the ARTIC analysis, ViroConstrictor required the reference FASTA files and primer schemes to be combined:
 
+| File | Location |
 |------|----------|
 | Combined reference FASTA | `references/HAdV_E4_combined_refs.fasta` |
 | Combined primer scheme | `bed_files/HAdV_E4_combined_refs.scheme.SA.update.bed` |
@@ -134,21 +134,25 @@ references/HAdV_E4_KX384945.fas
 bed_files/MN307142.scheme.SA.update.bed
 bed_files/KX384945.scheme.SA.update.bed
 
-**Output:** results/adeno_E4/ds1641_wrapper/
+**Output:** 
+```bash
+results/adeno_E4/ds1641_wrapper/
 └── barcodeXX/
     ├── MN307142/
     └── KX384945/
-
+```
 ARTIC produces a range of outputs that can be found in output path above for each barcode in two separate reference results directories.
 
 ### 1.2 ARTIC Consensus Metrics
 
 **Script:** scripts/artic/artic_consensus_metrics.sh
 
-This script extracts and calculates consensus quality metrics that were generated from the ARITC analysis into a tsv file.
-The results contain the consensus sequence length, A, C, G and T base counts, ambiguous base count, ambiguous base percentage (N%), mean amplicon depth and they number of PASS variants per barcode against both references.
+This script extracts and calculates consensus quality metrics that were generated from the ARTIC analysis into a tsv file.
+The results contain the consensus sequence length, A, C, G and T base counts, ambiguous base count, ambiguous base percentage (N%), mean amplicon depth and the number of PASS variants per barcode against both references.
 
-**Input:** results/
+**Input:** 
+```bash
+results/
 └── adeno_E4/
     └── ds1641_wrapper/
         └── barcodeXX/
@@ -160,22 +164,24 @@ The results contain the consensus sequence length, A, C, G and T base counts, am
                 ├── *.consensus.fasta
                 ├── *.amplicon_depths.tsv
                 └── *.pass.vcf
-
+```
 **Output:** ds1641_consensus_metrics.tsv
 
 ## Multiple Sequence Alignment
 
-Following ARTIC consensus sequence generation, a multiple sequence alignment which aligned both sequences separately was performed with MAFFT v.7.256.
+Following ARTIC consensus sequence generation, a multiple sequence alignment which aligned both sequences separately was performed with MAFFT v7.256.
 
 ### 2.1 MN307142 Alignment
 
 **Script:** scripts/alignment/ds1641_MN307142_mafft_wrapper.sh
 
-Prior to MAFFT analysis in this script, the consensus sequences generated against MN307142 and combined into a single FASTA file with header manipulation to correct format.
+Prior to MAFFT analysis in this script, the consensus sequences generated against MN307142 are combined into a single FASTA file with header manipulation to correct format.
 
 **Input:** results/adeno_E4/ds1641_wrapper/barcode*/MN307142/*.consensus.fasta
 
-**Output:** results/
+**Output:** 
+```bash
+results/
 └── adeno_E4/
     └── MN307142_combined_fastas/
         └── ds1641_MN307142_consensus.fasta
@@ -185,16 +191,18 @@ results/
     └── ds1641_wrapper/
         └── MN307142_MAFFT/
             └── ds1641_MN307142_mafft_wrapper.fasta
-
+```
 ### 2.2 KX384945 Alignment
 
 **Script:** scripts/alignment/ds1641_KX384945_mafft_wrapper.sh
 
-Another MAFFT script with the same function was executed for KX384945
+Another MAFFT script with the same function was executed for KX384945.
 
 **Input**: results/adeno_E4/ds1641_wrapper/barcode*/KX384945/*.consensus.fasta
 
-**Output**: results/
+**Output**: 
+```bash
+results/
 └── adeno_E4/
     └── KX384945_combined_fastas/
         └── ds1641_KX384945_consensus.fasta
@@ -204,13 +212,13 @@ results/
     └── ds1641_wrapper/
         └── KX384945_MAFFT/
             └── ds1641_KX384945_mafft_wrapper.fasta
-
+```
 ## 3. ViroConstrictor Workflow
 
 Following ARTIC analysis, ViroConstrictor was configured and optimised to act as an alternative amplicon sequencing pipeline for the same samples and reference genomes in this study.
 
 Two ViroConstrictor analysis scripts were produced, the first was a MatchRef script that included both reference genomes and matched samples to the more suited reference.
-The second script only used KX384945, the poorer reference match, to produce results that could be compared to ARTIC performance with the poorer reference.
+The second script only used KX384945, the poorer reference match, to produce results that could be compared to ARTIC performance with this poorer reference.
 
 ### 3.1 FASTQ Preparation
 
@@ -220,11 +228,13 @@ The ViroConstrictor pipeline required a single FASTQ file containing each sample
 
 **Input:** reads/ds1641/barcode*/*.fastq.gz
 
-**Output:** results/adeno_E4/viroconstrictor/raw_combined_fastqs/
+**Output:** 
+```bash
+results/adeno_E4/viroconstrictor/raw_combined_fastqs/
 ├── barcode62.fastq.gz
 ├── barcode65.fastq.gz
 └── ...
-
+```
 ### 3.2 ViroConstrictor MatchRef Analysis
 
 **scripts/viroconstrictor/viroconstrictor_ds1641_matchref.sh** 
@@ -250,11 +260,11 @@ bed_files/HAdV_E4_combined_refs.scheme.SA.update.bed
 Key outputs of ViroConstrictor include an amplicon coverage csv file, a consensus fasta file, a mutations file and a width of coverage file.
 ViroConstrictor produces these in two separate directories within results in the script's output path as a combined output and by sample outputs.
 
-### KX384945 ViroConstrictor Analysis
+### 3.3 KX384945 ViroConstrictor Analysis
 
 **Script:** scripts/viroconstrictor/viroconstrictor_ds1641_KX384945.sh
 
-This ViroConstrictor analysis script excluded MatchRef, and ran only the poorer sutied KX384945 reference genome against barcodes to produce results for comparison against KX384945 ARTIC results.
+This ViroConstrictor analysis script excluded MatchRef, and ran only the poorer-suited KX384945 reference genome against barcodes to produce results for comparison against KX384945 ARTIC results.
 
 **Input:** results/adeno_E4/viroconstrictor/raw_combined_fastqs/
 references/HAdV_E4_KX384945_uppercase_and_ungapped.fasta
@@ -262,26 +272,26 @@ bed_files/KX384945.scheme.SA.update.bed
 
 **Output:** results/adeno_E4/viroconstrictor/ds1641_KX384945/
 
-Key ouputs of this analysis were produced by the pipeline in the same way as the ViroConstrictor MatchRef script
+Key outputs of this analysis were produced by the pipeline in the same way as the ViroConstrictor MatchRef script
 
 ### 3.4 ViroConstrictor Metrics
 
 **Scripts:** scripts/viroconstrictor/viroconstrictor_matchref_metrics.sh
 scripts/viroconstrictor/viroconstrictor_KX384945_metrics.sh
 
-These two scripts were used to extract consensus sequence metrcis from ViroConstrictor outputs
+These two scripts were used to extract consensus sequence metrics from ViroConstrictor outputs
 
 Similar to ARTIC the scripts extract and calculate consensus sequence length, A, C, G, and T base counts, ambiguous base counts and percentage of ambiguous bases (%N) for barcodes against the reference genomes.
 
 **Output:** viroconstrictor_matchref_consensus_metrics.tsv
 viroconstrictor_KX_consensus_metrics.tsv
 
-## 4. Downstream Analysis and Visualisation Barplot
+## 4. Downstream Analysis and Visualisation 
 
 A series of four R scripts are included in this repository that visualised results of the pipelines.
-Barcode62 is excluded from every analysis in the scripts as it one primer pool failed to amplify in the laboratory, and this was seen Barcode62's consensus sequences.
+Barcode62 is excluded from every analysis in the scripts because one primer pool failed to amplify in the laboratory, and this was observed barcode62's consensus sequences.
 
-### 4.1 ARTIC Reference Comparison
+### 4.1 ARTIC Reference Comparison Barplot
 
 **Script:** scripts/analysis/artic_percentage_n_plot.R
 
@@ -320,11 +330,13 @@ There two separate panels, one panel to show mutation counts for KX384945 consen
 
 **Script:** scripts/analysis/hadv_e4_genome_amplicon_map.R
 
-This script visualises a linear representation of the HAdV-E4 genome that shows genomic postions and the layout of the 18 tiled amplicons of the MN307142 bed scheme.
+This script visualises a linear representation of the HAdV-E4 genome that shows genomic positions and the layout of the 18 tiled amplicons of the MN307142 bed scheme.
 
 **Input:** Accessible GenBank annotated MN307142 HAdV genome gene coordinates and MN307142 primer scheme amplicon coordinates (which is provided in this repository).
 
 **Output:**: HAdV_E4_gene_overlap_amplicon_map.svg
+
+This SVG was edited in Inkscape to fix format and exported out as HAdV_E4_gene_overlap_amplicon_map.png` for inclusion in the dissertation and this repository (see outputs/figures).
 
 ### Author 
 
