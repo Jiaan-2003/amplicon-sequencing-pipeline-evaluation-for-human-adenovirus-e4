@@ -4,7 +4,7 @@ This repository contains the computational workflow used to evaluate the effect 
 
 The analysis in this study primarily used the ARTIC fieldbioinformatics pipeline to process samples against two HAdV-E4 reference genomes, MN307142 and KX384945. The analysis was then expanded to use the ViroConstrictor pipeline to assess the same sequenced samples against the two reference genomes with an alternative workflow, allowing similarities and differences between pipeline outputs to be evaluated.
 
-This repository contains the scripts, reference genomes, primer schemes, software environments and relevant downstream analysis code used in the project. Raw sequencing reads are not available in this repository due to confidentiality.
+This repository contains the scripts, reference genomes, primer schemes, software environments, output examples and relevant downstream analysis code used in the project. Raw sequencing reads are not available in this repository due to confidentiality.
 
 ## Clone the Repository
 
