@@ -10,7 +10,7 @@ This repository contains the scripts, reference genomes, primer schemes, softwar
 
 The workflow below provides a general overview of the computational analysis that was performed in this project.
 
-![Workflow Overview](images/Amplicon_Sequencing_Flow_Diagram.svg)
+![Workflow Overview](images/Amplicon_Sequencing_Flow_Diagram.SVG)
 
 
 ## Clone the Repository
