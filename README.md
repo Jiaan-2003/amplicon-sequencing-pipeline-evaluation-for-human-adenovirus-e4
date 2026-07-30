@@ -306,7 +306,7 @@ Barcode62 is excluded from every analysis in the scripts because one primer pool
 
 **Script:** scripts/analysis/artic_percentage_n_plot.R
 
-This script compares the percentage of ambiguous bases of barcodes run against both MN307142 and KX384945 using ARTIC
+This script compares the percentage of ambiguous bases of barcodes run against both MN307142 and KX384945 using ARTIC.
 
 **Input:** artic_consensus_metrics.csv
 
