@@ -6,6 +6,13 @@ The analysis in this study primarily used the ARTIC fieldbioinformatics pipeline
 
 This repository contains the scripts, reference genomes, primer schemes, software environments, output examples and relevant downstream analysis code used in the project. Raw sequencing reads are not available in this repository due to confidentiality.
 
+## Workflow
+
+The workflow below provides a general overview of the computational analysis that was performed in this project.
+
+![Workflow Overview](images/Amplicon_Sequencing_Flow_Diagram.svg)
+
+
 ## Clone the Repository
 
 ```bash
