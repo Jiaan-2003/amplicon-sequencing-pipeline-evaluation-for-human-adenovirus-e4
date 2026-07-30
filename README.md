@@ -1,6 +1,6 @@
 # Evaluating and Optimising Amplicon Sequencing Pipelines for Genetically Diverse Viral Cohorts
 
-This repository contains the computational workflow used to evaluate the effect of reference genome selection on Oxford Nanopore Technology (ONT) tiled-amplicon sequencing analysis of Human adenovirus species E (HAdV-E4).
+This repository contains the computational workflow used to evaluate the effect of reference genome selection on Oxford Nanopore Technologies (ONT) tiled-amplicon sequencing analysis of Human adenovirus species E (HAdV-E4).
 
 The analysis in this study primarily used the ARTIC fieldbioinformatics pipeline to process samples against two HAdV-E4 reference genomes, MN307142 and KX384945. The analysis was then expanded to use the ViroConstrictor pipeline to assess the same sequenced samples against the two reference genomes with an alternative workflow, allowing similarities and differences between pipeline outputs to be evaluated.
 
@@ -57,7 +57,7 @@ reads/
 
 ## Software and Tools
 
-The computational use of the ARTIC and ViroConstrictor pipelines was conducted via a series of custom Bash scripts on the University of Nottingham high-performance computer (HPC), which used a Slurm system for job submission. Additional analysis included the use of Inkscape for figure formatting, NCBI BLASTn to search sequences and RStudio to utilise packages for figure generation.
+The computational use of the ARTIC and ViroConstrictor pipelines was conducted via a series of custom Bash scripts on the University of Nottingham high-performance computer (HPC), which used a Slurm system for job submission. Additional analysis included the use of Inkscape for figure formatting, NCBI BLASTn for sequence searching and RStudio to utilise packages for figure generation.
 The following tables list the tools and packages with their versions at the time of use.
 
 | Tool | Version |
@@ -67,7 +67,7 @@ The following tables list the tools and packages with their versions at the time
 | [MAFFT](https://mafft.cbrc.jp/alignment/software/) | v7.526 |
 | [R](https://www.r-project.org/) | 4.5.1 |
 | [RStudio](https://posit.co/products/open-source/rstudio/) | 2025.05.1+513 |
-| [Inkscape](https://inkscape.org/) | [1.4.4] |
+| [Inkscape](https://inkscape.org/) | 1.4.4 |
 | [NCBI BLASTn](https://blast.ncbi.nlm.nih.gov/Blast.cgi) | Web version |
 
 ### R Packages
@@ -91,14 +91,14 @@ environments/viroconstrictor_environment.yml
 
 These environments can be reproduced with the following commands:
 
-```{r}
+```bash
 conda env create -f environments/artic_environment.yml
 conda env create -f environments/viroconstrictor_environment.yml
 ```
 
 ## Placeholder Paths
 
-The Bash scripts in this workflow have placeholder paths implemented (/your/project/path), so users should ensure they replace these with the corresponding path of their own repository.
+The Bash scripts in this workflow have placeholder paths implemented (/your/project/path), so users should ensure they replace these with the corresponding path to their own repository.
 
 ## Reference Genomes and Primer Schemes
 
@@ -132,7 +132,7 @@ The following describes each stage of the workflow in this analysis and details 
 
 **Script:** scripts/artic/artic_ds1641_wrapper.sh
 
-This ARTIC wrapper script processes each barcode in the analysis against both the MN307142 and KX384945 reference genomes. This uses artic guppyplex to filter reads to an optimised length range of 2,000-3,000 bp. Then, artic minion runs each barcode against the references and their corresponding bed file.
+This ARTIC wrapper script processes each barcode in the analysis against both the MN307142 and KX384945 reference genomes. This uses ARTIC guppyplex to filter reads to an optimised length range of 2,000-3,000 bp. Then, ARTIC minion runs each barcode against the references and their corresponding bed file.
 Other parameters include a normalisation set to 200 and the use of eight threads.
 
 **Input:** 
@@ -177,7 +177,7 @@ results/
 
 ## Multiple Sequence Alignment
 
-Following ARTIC consensus sequence generation, a multiple sequence alignment which aligned both sequences separately was performed with MAFFT v7.256.
+Following ARTIC consensus sequence generation, multiple sequence alignments were performed separately for each reference using MAFFT v7.526
 
 ### 2.1 MN307142 Alignment
 
@@ -266,7 +266,7 @@ Key parameters and configuration options in this analysis script include:
 
 **Outputs:** results/adeno_E4/viroconstrictor/ds1641_matchref/
 
-Key outputs of ViroConstrictor include an amplicon coverage csv file, a consensus fasta file, a mutations file and a width of coverage file.
+Key outputs of ViroConstrictor include an amplicon coverage CSV file, a consensus FASTA file, a mutations file and a width of coverage file.
 ViroConstrictor produces these in two separate directories within results in the script's output path as a combined output and by sample outputs.
 
 ### 3.3 KX384945 ViroConstrictor Analysis
@@ -290,27 +290,27 @@ Key outputs of this analysis were produced by the pipeline in the same way as th
 - scripts/viroconstrictor/viroconstrictor_matchref_metrics.sh
 - scripts/viroconstrictor/viroconstrictor_KX384945_metrics.sh
 
-These two scripts were used to extract consensus sequence metrics from ViroConstrictor outputs
+These two scripts were used to extract consensus sequence metrics from ViroConstrictor outputs.
 
-Similar to ARTIC the scripts extract and calculate consensus sequence length, A, C, G, and T base counts, ambiguous base counts and percentage of ambiguous bases (%N) for barcodes against the reference genomes.
+Similar to ARTIC, the scripts extract and calculate consensus sequence length, A, C, G, and T base counts, ambiguous base counts and percentage of ambiguous bases (%N) for barcodes against the reference genomes.
 
 **Output:** viroconstrictor_matchref_consensus_metrics.tsv
 viroconstrictor_KX_consensus_metrics.tsv
 
 ## 4. Downstream Analysis and Visualisation 
 
-A series of four R scripts are included in this repository that visualised results of the pipelines.
+A series of four R scripts are included in this repository that were used to visualise the pipeline results
 Barcode62 is excluded from every analysis in the scripts because one primer pool failed to amplify in the laboratory, and this was observed in barcode62's consensus sequences.
 
 ### 4.1 ARTIC Reference Comparison Barplot
 
 **Script:** scripts/analysis/artic_percentage_n_plot.R
 
-This script compares the percentage of ambiguous bases of barcodes ran against both MN307142 and KX384945 using ARTIC
+This script compares the percentage of ambiguous bases of barcodes run against both MN307142 and KX384945 using ARTIC
 
 **Input:** artic_consensus_metrics.csv
 
-*(The artic consensus metrics were converted from tsv to csv for script input)*
+*(The artic consensus metrics were converted from TSV to CSV for script input)*
 
 **Output:** ARTIC_percentage_N_MN_vs_KX.png
 
@@ -318,7 +318,7 @@ This script compares the percentage of ambiguous bases of barcodes ran against b
 
 **Script:** scripts/analysis/viroconstrictor_amplicon_coverage_heatmap.R
 
-This script visualises the mean amplicon coverage across the MN307142 tiled-amplicon scheme, with amplicons displayed in genomic order (1-18). and barcodes measured against them.
+This script visualises the mean amplicon coverage across the MN307142 tiled-amplicon scheme, with amplicons displayed in genomic order (1-18), and barcodes measured against them.
 
 **Input:** all_amplicon_coverage.csv
 
@@ -333,7 +333,7 @@ There are two separate panels, one panel to show mutation counts for KX384945 co
 
 **Input:** mutation_counts.csv
 
-*It should be noted the script hardcoded mutation counts into a single CSV. ARTIC mutation counts could be seen in the PASS variants column on the ARTIC consensus tsv, and ViroConstrictor mutation counts were automatically produced in the all_mutations.tsv under both result file paths for the MatchRef and KX384945 analyses.*
+*It should be noted the script hardcoded mutation counts into a single CSV. ARTIC mutation counts could be seen in the PASS variants column on the ARTIC consensus TSV, and ViroConstrictor mutation counts were automatically produced in the all_mutations.tsv under both result file paths for the MatchRef and KX384945 analyses.*
 
 **Output:** pipeline_mutation_comparison.png
 
@@ -347,7 +347,7 @@ This script visualises a linear representation of the HAdV-E4 genome that shows 
 
 **Output:** HAdV_E4_gene_overlap_amplicon_map.svg
 
-This SVG was edited in Inkscape to fix format and exported out as HAdV_E4_gene_overlap_amplicon_map.png for inclusion in the dissertation and this repository (see outputs/figures).
+This SVG was edited in Inkscape to fix format and exported as HAdV_E4_gene_overlap_amplicon_map.png for inclusion in the dissertation and this repository (see outputs/figures).
 
 ### Author 
 
