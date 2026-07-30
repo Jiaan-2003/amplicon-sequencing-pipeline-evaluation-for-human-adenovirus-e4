@@ -177,7 +177,7 @@ results/
 
 ## Multiple Sequence Alignment
 
-Following ARTIC consensus sequence generation, multiple sequence alignments were performed separately for each reference using MAFFT v7.526
+Following ARTIC consensus sequence generation, multiple sequence alignments were performed separately for each reference using MAFFT v7.526.
 
 ### 2.1 MN307142 Alignment
 
@@ -232,7 +232,7 @@ The second script only used KX384945, the poorer reference match, to produce res
 
 **Script:** scripts/viroconstrictor/combine_ds1641_fastqs.sh
 
-The ViroConstrictor pipeline required a single FASTQ file containing each sample, which this script fulfills by combining the individual pass FASTQ files into one .fastq.gz file.
+The ViroConstrictor pipeline required a single FASTQ file containing each sample, which this script fulfils by combining the individual pass FASTQ files into one .fastq.gz file.
 
 **Input:** reads/ds1641/barcode*/*.fastq.gz
 
@@ -282,7 +282,7 @@ This ViroConstrictor analysis script excluded MatchRef, and ran only the poorer-
 
 **Output:** results/adeno_E4/viroconstrictor/ds1641_KX384945/
 
-Key outputs of this analysis were produced by the pipeline in the same way as the ViroConstrictor MatchRef script
+Key outputs of this analysis were produced by the pipeline in the same way as the ViroConstrictor MatchRef script.
 
 ### 3.4 ViroConstrictor Metrics
 
@@ -299,7 +299,7 @@ viroconstrictor_KX_consensus_metrics.tsv
 
 ## 4. Downstream Analysis and Visualisation 
 
-A series of four R scripts are included in this repository that were used to visualise the pipeline results
+A series of four R scripts are included in this repository that were used to visualise the pipeline results.
 Barcode62 is excluded from every analysis in the scripts because one primer pool failed to amplify in the laboratory, and this was observed in barcode62's consensus sequences.
 
 ### 4.1 ARTIC Reference Comparison Barplot
@@ -329,7 +329,7 @@ This script visualises the mean amplicon coverage across the MN307142 tiled-ampl
 **Script:** scripts/analysis/pipeline_mutation_comparison.R
 
 This script compared the reported mutation counts between the consensus genomes generated against MN307142 and KX384945 by both the ARTIC and ViroConstrictor pipelines.
-There are two separate panels, one panel to show mutation counts for KX384945 consensus sequences between both pipelines, and the other to show the mutation counts for MN307142 consensus sequences between both pipelines.
+There are two separate panels, one to show mutation counts for KX384945 consensus sequences between both pipelines, and the other to show the mutation counts for MN307142 consensus sequences between both pipelines.
 
 **Input:** mutation_counts.csv
 
